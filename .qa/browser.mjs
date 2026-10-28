@@ -91,6 +91,7 @@ try {
   await cdp('Page.reload',{ignoreCache:true});
   await pause(600);
   await evaluate('document.fonts.ready.then(()=>true)');
+  await evaluate('Promise.all([...document.images].filter(img=>img.loading!=="lazy").map(img=>img.decode())).then(()=>true)');
   for(const width of [320,375,390,430,768,1024,1280,1440]) {
     await cdp('Emulation.setDeviceMetricsOverride',{width,height:width<600?844:1000,deviceScaleFactor:1,mobile:width<600});
     const layout = await evaluate(`(async()=>{await document.fonts.ready;const elements=[...document.querySelectorAll('a,button')].filter(e=>e.getBoundingClientRect().height);const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height};};return {width:innerWidth,scrollWidth:document.documentElement.scrollWidth,title:rect(document.querySelector('h1')),titleScroll:document.querySelector('h1').scrollWidth,art:rect(document.querySelector('.cover')),columns:getComputedStyle(document.querySelector('.platform-grid')).gridTemplateColumns,video:rect(document.querySelector('.video-frame')),links:[...document.querySelectorAll('.platform-card')].map(e=>({url:e.href,target:e.target,rel:e.rel,height:e.getBoundingClientRect().height})),broken:[...document.images].filter(i=>i.complete&&!i.naturalWidth).map(i=>i.src),smallTargets:elements.filter(e=>e.getBoundingClientRect().height<43).map(e=>({text:e.textContent.trim(),height:e.getBoundingClientRect().height})),placeholderLinks:[...document.querySelectorAll('a[href]')].filter(a=>/example|placeholder|YOUR-DOMAIN/.test(a.href)).length,fonts:document.fonts.check('400 14px Manrope')&&document.fonts.check('400 24px Cinzel')};})()`);
@@ -105,7 +106,9 @@ try {
     assert(Math.abs(layout.video.width/layout.video.height-16/9)<.02,'Video must retain a 16:9 ratio');
     console.log(`Layout ${width}px: OK; columns ${layout.columns}`);
     if([390,1440].includes(width)) {
+      await evaluate('document.querySelector(".video-poster > img").decode().then(()=>true)');
       await evaluate('window.scrollTo({top:0,behavior:"instant"})');
+      await pause(200);
       const metrics = await cdp('Page.getLayoutMetrics');
       const shot=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.ceil(metrics.cssContentSize.height),scale:1}});
       await writeFile(resolve(qa,`preview-${width}.png`),Buffer.from(shot.data,'base64'));

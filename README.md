@@ -9,7 +9,7 @@ A static release page for **Trinetrashwari**, the 2026 original single by Traffi
 3. Right-click `index.html` and choose **Open with Live Server**.
 4. Use the local address shown by the extension, usually `http://127.0.0.1:5500`.
 
-You can also open `index.html` directly. A local server is recommended for browser security features and accurate testing. On mobile, open the server's LAN address while connected to the same Wi-Fi; the share button will still avoid sharing that private address.
+You can also open `index.html` directly. In a `file://` preview, artwork uses the original JPEG and the video poster opens the official YouTube video in a new tab. **Use Live Server to test the embedded player**: YouTube requires an HTTP Referer, which a file page cannot provide (Error 153). HTTP(S) pages use the embedded player with an explicit referrer policy and the actual site origin. On mobile, open the server's LAN address while connected to the same Wi-Fi; the share button will still avoid sharing that private address.
 
 ## Files
 
@@ -100,11 +100,13 @@ In `SITE_CONFIG`, fill in `instagram`, `youtubeChannel`, and/or `contactEmail` o
 ## Artwork, logos, and fonts
 
 - The original supplied artwork is copied byte-for-byte. The WebP files preserve its complete square composition, colors, and existing text; responsive variants reduce transfer size. The artwork receives no text overlay, cropping, filters, or animation.
+- If a WebP request fails, JavaScript removes the selected picture source and retries the original JPEG. Both cover and video thumbnail have local JPEG fallbacks. Direct-file previews choose JPEG immediately.
 - Five platform SVGs come from [Simple Icons v13.21.0](https://github.com/simple-icons/simple-icons/tree/13.21.0). Their original paths are retained and brand colors are applied. Source links and the bundled license are in `assets/icons/`.
 - JioSaavn uses its **unmodified complete white primary logo** from the [official logo kit](https://www.jiosaavn.com/corporate/_assets/JioSaavn-Logo-Kit.zip). Its [brand guide](https://corporate.saavn.com/brand) requires approval for icon-only use, so the complete logo is used here.
 - All platform marks belong to their respective owners and identify release destinations; they do not imply sponsorship.
 - Cinzel and Manrope are locally hosted with their SIL Open Font License notices in `assets/fonts/`. No Google Fonts request is made by visitors' browsers.
-- The official YouTube thumbnail is stored locally. The privacy-enhanced YouTube iframe is created only after a visitor requests it; no iframe, tracking connection, audio, or video playback runs on initial load. Autoplay is never enabled. After loading, use the YouTube player's play control.
+- The official YouTube thumbnail is stored locally. On HTTP(S) pages, the privacy-enhanced YouTube iframe is created only after a visitor requests it; no iframe, tracking connection, audio, or video playback runs on initial load. Autoplay is never enabled. After loading, use the YouTube player's play control. Direct-file previews open the official video instead of inserting a player that would fail with Error 153.
+- The header's “Listen now” shortcut centers the video in the viewport. The player retains a 16:9 ratio and scales down on short viewports so it can be shown in full. Reduced-motion preferences disable the smooth scroll.
 
 ## Accessibility and performance
 

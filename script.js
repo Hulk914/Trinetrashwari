@@ -97,13 +97,64 @@ function renderPlatforms() {
   document.getElementById("watch-youtube").href = youtubePlatform.url;
 }
 
+/* <picture> falls back for unsupported formats, but not failed WebP requests.
+   Retry the original JPEG if a selected WebP cannot load. Direct-file previews
+   use JPEG immediately; HTTP(S) deployments retain responsive WebP delivery. */
+function initializeImageFallbacks() {
+  document.querySelectorAll("img[data-fallback]").forEach(image => {
+    const useOriginal = () => {
+      if (image.dataset.fallbackApplied) return;
+      image.dataset.fallbackApplied = "true";
+      image.closest("picture")?.querySelectorAll("source").forEach(source => source.remove());
+      image.removeAttribute("srcset");
+      image.removeAttribute("sizes");
+      image.src = image.dataset.fallback;
+    };
+    image.addEventListener("error", useOriginal, { once: true });
+    if (window.location.protocol === "file:" || (image.complete && !image.naturalWidth)) {
+      useOriginal();
+    }
+  });
+}
+
+function initializeVideoNavigation() {
+  const shortcut = document.querySelector('.header-listen[href="#video-player"]');
+  shortcut.addEventListener("click", event => {
+    event.preventDefault();
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById("video-player").scrollIntoView({
+      behavior: reducedMotion ? "instant" : "smooth",
+      block: "center"
+    });
+  });
+}
+
 /* No YouTube connection is made until a visitor requests the player.
-   Deliberately omit autoplay: loading the iframe never starts playback. */
+   Deliberately omit autoplay: loading the iframe never starts playback.
+   file:// and editor WebViews cannot supply an HTTP Referer, which causes
+   YouTube Error 153. Those previews use the exact official YouTube link. */
 function initializeVideo() {
   const trigger = document.getElementById("load-video");
+  if (!["http:", "https:"].includes(window.location.protocol)) {
+    const directLink = document.createElement("a");
+    directLink.className = trigger.className;
+    directLink.id = trigger.id;
+    directLink.href = youtubePlatform.url;
+    directLink.target = "_blank";
+    directLink.rel = "noopener noreferrer";
+    directLink.setAttribute("aria-label", "Watch Trinetrashwari on YouTube (opens in a new tab)");
+    directLink.append(...trigger.childNodes);
+    directLink.querySelector(".video-hint").firstChild.textContent = "WATCH ON YOUTUBE ";
+    trigger.replaceWith(directLink);
+    return;
+  }
   trigger.addEventListener("click", () => {
+    const embedUrl = new URL(`https://www.youtube-nocookie.com/embed/${VIDEO_ID}`);
+    embedUrl.searchParams.set("rel", "0");
+    embedUrl.searchParams.set("playsinline", "1");
+    embedUrl.searchParams.set("origin", window.location.origin);
     const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube-nocookie.com/embed/${VIDEO_ID}?rel=0&playsinline=1`;
+    iframe.src = embedUrl.href;
     iframe.title = "Trinetrashwari — Traffic Jam | Official Music Video";
     iframe.allow = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen";
     iframe.allowFullscreen = true;
@@ -237,7 +288,9 @@ function renderBandLinks() {
   container.hidden = container.childElementCount === 0;
 }
 
+initializeImageFallbacks();
 renderPlatforms();
+initializeVideoNavigation();
 initializeVideo();
 initializeShare();
 renderBandLinks();

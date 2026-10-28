@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#070B16">
   <meta name="color-scheme" content="dark">
+  <!-- YouTube needs the embedding HTTP(S) origin to identify this website. -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Trinetrashwari — Traffic Jam | An Ode to Shiva &amp; Shakti</title>
   <meta name="description" content="Experience Trinetrashwari, the 2026 original single by Bengaluru's Traffic Jam. An ode to Shiva & Shakti, where Indian classical meets progressive rock. Listen now.">
   <!-- DEPLOYMENT: replace every https://YOUR-DOMAIN.example/ URL with your
@@ -70,7 +72,7 @@
       <span class="brand-bars" aria-hidden="true"><i></i><i></i><i></i></span>
       TRAFFIC JAM<span class="wordmark-location">BENGALURU · INDIA</span>
     </a>
-    <a class="header-listen" href="#listen">Listen now <span aria-hidden="true">↗</span></a>
+    <a class="header-listen" href="#video-player">Listen now <span aria-hidden="true">↗</span></a>
   </header>
 
   <main id="main">
@@ -79,7 +81,7 @@
         <div class="art-frame">
           <picture>
             <source srcset="assets/trinetrashwari-cover-640.webp 640w, assets/trinetrashwari-cover-1200.webp 1200w, assets/trinetrashwari-cover.webp 2000w" sizes="(min-width: 1400px) 520px, (min-width: 1000px) calc((100vw - 200px) / 2), (min-width: 620px) 524px, calc(100vw - 58px)" type="image/webp">
-            <img class="cover" src="assets/trinetrashwari-cover.jpg" width="2000" height="2000" fetchpriority="high" alt="Trinetrashwari album cover by Traffic Jam: Shiva and Shakti united, with a cosmic blue universe on the left and fiery orange guitars on the right.">
+            <img class="cover" src="assets/trinetrashwari-cover.jpg" data-fallback="assets/trinetrashwari-cover.jpg" width="2000" height="2000" fetchpriority="high" alt="Trinetrashwari album cover by Traffic Jam: Shiva and Shakti united, with a cosmic blue universe on the left and fiery orange guitars on the right.">
           </picture>
         </div>
         <figcaption class="art-caption"><span>ORIGINAL SINGLE</span><span class="caption-rule" aria-hidden="true"></span><span>2026</span><span class="caption-dot" aria-hidden="true">·</span><span>7:47</span></figcaption>
@@ -108,11 +110,11 @@
     <section class="video-section wrap" aria-labelledby="video-title">
       <div class="section-heading">
         <div><p class="eyebrow">THE OFFICIAL MUSIC VIDEO</p><h2 id="video-title">Experience Trinetrashwari</h2></div>
-        <a class="text-link" id="watch-youtube" target="_blank" rel="noopener noreferrer" href="https://youtu.be/L5fivEQxBL4?si=XWLZzccpu0Qn4izW">Watch on YouTube <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+        <a class="text-link watch-button" id="watch-youtube" target="_blank" rel="noopener noreferrer" href="https://youtu.be/L5fivEQxBL4?si=XWLZzccpu0Qn4izW">Watch on YouTube <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
       </div>
       <div class="video-frame" id="video-player">
         <button class="video-poster" id="load-video" type="button" aria-label="Load the official Trinetrashwari video player">
-          <img src="assets/trinetrashwari-video.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Official Trinetrashwari music video thumbnail">
+          <img src="assets/trinetrashwari-video.webp" data-fallback="assets/trinetrashwari-video-source.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Official Trinetrashwari music video thumbnail">
           <span class="video-shade" aria-hidden="true"></span>
           <span class="video-play"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m12 7 14 9-14 9Z"/></svg></span>
           <span class="video-poster-caption"><span class="eyebrow">TRAFFIC JAM</span><span class="video-poster-title">The sound. The spirit.</span><span class="video-poster-bottom">OFFICIAL MUSIC VIDEO <span>7:47</span></span></span>
@@ -134,10 +136,41 @@
       <div class="section-heading"><div><p class="eyebrow">THE COLLECTIVE</p><h2 id="credits-title">The People Behind the Music</h2></div><span class="credits-mark" aria-hidden="true">TJ / 2026</span></div>
       <!-- Edit the credits directly here. No photos or extra data sources required. -->
       <div class="credits-grid">
-        <div class="credit-group performed"><h3>Performed by</h3><dl class="performer-list"><div><dt>Vocals</dt><dd>Harshal <span>|</span> Himanshu</dd></div><div><dt>Keyboard</dt><dd>Chinmay</dd></div><div><dt>Lead Guitar</dt><dd>Ayush</dd></div><div><dt>Bass Guitar</dt><dd>Hari</dd></div><div><dt>Drums</dt><dd>Dhruv</dd></div><div><dt>Tabla</dt><dd>Rohit</dd></div></dl></div>
-        <div class="credit-group"><h3>Composition</h3><ul><li>Ayush Thakur</li><li>Chinmay Joshi</li><li>Himanshu Mahar</li><li>Harshal Pandey</li></ul></div>
-        <div class="credit-stack"><div class="credit-group"><h3>Lyrics</h3><ul><li>Harshal Pandey</li><li>Himanshu Mahar</li></ul></div><div class="credit-group"><h3>Backing vocals</h3><p>Shreya <span>|</span> Ayush <span>|</span> Chinmay</p></div></div>
-        <div class="credit-group production"><h3>Mixing / Mastering / Production</h3><p>Cymasonic Labs</p><span class="production-rule" aria-hidden="true"></span></div>
+        <div class="credit-group performed">
+          <h3>Performed by</h3>
+          <dl class="performer-list">
+            <div><dt>Vocals</dt><dd>Harshal <span>|</span> Himanshu</dd></div>
+            <div><dt>Keyboard</dt><dd>Chinmay</dd></div>
+            <div><dt>Lead Guitar</dt><dd>Ayush</dd></div>
+            <div><dt>Bass Guitar</dt><dd>Hari</dd></div>
+            <div><dt>Drums</dt><dd>Dhruv</dd></div>
+            <div><dt>Tabla</dt><dd>Rohit</dd></div>
+          </dl>
+        </div>
+        <div class="credit-group">
+          <h3>Composition</h3>
+          <ul>
+            <li>Ayush Thakur</li>
+            <li>Chinmay Joshi</li>
+            <li>Himanshu Mahar</li>
+            <li>Harshal Pandey</li>
+          </ul>
+        </div>
+        <div class="credit-stack">
+          <div class="credit-group">
+            <h3>Lyrics</h3>
+            <ul><li>Harshal Pandey</li><li>Himanshu Mahar</li></ul>
+          </div>
+          <div class="credit-group">
+            <h3>Backing vocals</h3>
+            <p>Shreya <span>|</span> Ayush <span>|</span> Chinmay</p>
+          </div>
+        </div>
+        <div class="credit-group production">
+          <h3>Mixing / Mastering / Production</h3>
+          <p>Cymasonic Labs</p>
+          <span class="production-rule" aria-hidden="true"></span>
+        </div>
       </div>
     </section>
 
