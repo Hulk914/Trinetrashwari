@@ -1,0 +1,146 @@
+{
+  "errors": [],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:5173/",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/trinetrashwari-cover-640.webp",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:5173/script.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/fonts/cinzel-latin.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/style.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/fonts/manrope-latin.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/spotify.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/youtube.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/applemusic.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/youtubemusic.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/amazonmusic.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/jiosaavn.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/trinetrashwari-cover.jpg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/trinetrashwari-cover.jpg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/trinetrashwari-video.webp",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/trinetrashwari-video-source.jpg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/style.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/trinetrashwari-cover-640.webp",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/fonts/cinzel-latin.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/script.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/fonts/manrope-latin.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/spotify.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/youtube.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/youtubemusic.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/applemusic.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/amazonmusic.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/jiosaavn.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/trinetrashwari-video.webp",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://www.youtube-nocookie.com/embed/L5fivEQxBL4?rel=0&playsinline=1",
+      "status": 200
+    }
+  ],
+  "links": [
+    "https://open.spotify.com/album/5cbsY7rgRlxSGR2H37nDtb?si=YsgXbgDCQOWTPPRCgk6CtA&utm_source=copy-link",
+    "https://youtu.be/L5fivEQxBL4?si=XWLZzccpu0Qn4izW",
+    "https://music.youtube.com/watch?v=L5fivEQxBL4&si=KdR09eJH3BARC0G0&drli=1",
+    "https://music.apple.com/in/album/trinetrashwari-single/6826457405",
+    "https://music.amazon.in/albums/B0HP3M34LZ?do=play&trackAsin=B0HP3JGLGV&ts=1792829870&ref=dm_sh_pxql7o7OZu6CRZOmTfdSn5Uwz&referrer=dm_sh_whatsapp",
+    "https://www.jiosaavn.com/song/trinetrashwari/XT4JWjtTAQE"
+  ],
+  "video": {
+    "src": "https://www.youtube-nocookie.com/embed/L5fivEQxBL4?rel=0&playsinline=1",
+    "title": "Trinetrashwari — Traffic Jam | Official Music Video",
+    "allow": "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+  }
+}
