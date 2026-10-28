@@ -6,27 +6,23 @@
       "status": 200
     },
     {
+      "url": "http://127.0.0.1:5173/style.css",
+      "status": 200
+    },
+    {
       "url": "http://127.0.0.1:5173/assets/trinetrashwari-cover-640.webp",
-      "status": 404
+      "status": 200
     },
     {
       "url": "http://127.0.0.1:5173/script.js",
       "status": 200
     },
     {
-      "url": "http://127.0.0.1:5173/assets/fonts/cinzel-latin.woff2",
-      "status": 200
-    },
-    {
-      "url": "http://127.0.0.1:5173/style.css",
-      "status": 200
-    },
-    {
-      "url": "http://127.0.0.1:5173/assets/fonts/manrope-latin.woff2",
-      "status": 200
-    },
-    {
       "url": "http://127.0.0.1:5173/assets/icons/spotify.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/youtubemusic.svg",
       "status": 200
     },
     {
@@ -38,10 +34,6 @@
       "status": 200
     },
     {
-      "url": "http://127.0.0.1:5173/assets/icons/youtubemusic.svg",
-      "status": 200
-    },
-    {
       "url": "http://127.0.0.1:5173/assets/icons/amazonmusic.svg",
       "status": 200
     },
@@ -50,11 +42,11 @@
       "status": 200
     },
     {
-      "url": "http://127.0.0.1:5173/assets/icons/favicon.svg",
+      "url": "http://127.0.0.1:5173/assets/fonts/cinzel-latin.woff2",
       "status": 200
     },
     {
-      "url": "http://127.0.0.1:5173/assets/trinetrashwari-cover.jpg",
+      "url": "http://127.0.0.1:5173/assets/fonts/manrope-latin.woff2",
       "status": 200
     },
     {
@@ -63,10 +55,6 @@
     },
     {
       "url": "http://127.0.0.1:5173/assets/trinetrashwari-video.webp",
-      "status": 200
-    },
-    {
-      "url": "http://127.0.0.1:5173/assets/trinetrashwari-video-source.jpg",
       "status": 200
     },
     {
@@ -102,11 +90,11 @@
       "status": 200
     },
     {
-      "url": "http://127.0.0.1:5173/assets/icons/youtubemusic.svg",
+      "url": "http://127.0.0.1:5173/assets/icons/applemusic.svg",
       "status": 200
     },
     {
-      "url": "http://127.0.0.1:5173/assets/icons/applemusic.svg",
+      "url": "http://127.0.0.1:5173/assets/icons/youtubemusic.svg",
       "status": 200
     },
     {
@@ -126,7 +114,123 @@
       "status": 200
     },
     {
-      "url": "https://www.youtube-nocookie.com/embed/L5fivEQxBL4?rel=0&playsinline=1",
+      "url": "https://www.youtube-nocookie.com/embed/L5fivEQxBL4?rel=0&playsinline=1&origin=http%3A%2F%2F127.0.0.1%3A5173",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/style.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/fonts/manrope-latin.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/script.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/fonts/cinzel-latin.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/youtube.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/spotify.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/youtubemusic.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/applemusic.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/trinetrashwari-video-source.jpg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/trinetrashwari-cover.jpg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/amazonmusic.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/jiosaavn.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/assets/icons/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/index.html",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/style.css",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/script.js",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/trinetrashwari-cover-640.webp",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/fonts/manrope-latin.woff2",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/fonts/cinzel-latin.woff2",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/trinetrashwari-video.webp",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/trinetrashwari-cover.jpg",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/trinetrashwari-video-source.jpg",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/icons/spotify.svg",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/icons/youtube.svg",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/icons/youtubemusic.svg",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/icons/applemusic.svg",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/icons/amazonmusic.svg",
+      "status": 200
+    },
+    {
+      "url": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/icons/jiosaavn.png",
       "status": 200
     }
   ],
@@ -139,8 +243,46 @@
     "https://www.jiosaavn.com/song/trinetrashwari/XT4JWjtTAQE"
   ],
   "video": {
-    "src": "https://www.youtube-nocookie.com/embed/L5fivEQxBL4?rel=0&playsinline=1",
+    "src": "https://www.youtube-nocookie.com/embed/L5fivEQxBL4?rel=0&playsinline=1&origin=http%3A%2F%2F127.0.0.1%3A5173",
     "title": "Trinetrashwari — Traffic Jam | Official Music Video",
     "allow": "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+  },
+  "embedRequests": [
+    {
+      "url": "https://www.youtube-nocookie.com/embed/L5fivEQxBL4?rel=0&playsinline=1&origin=http%3A%2F%2F127.0.0.1%3A5173",
+      "method": "GET",
+      "headers": {
+        "Referer": "http://127.0.0.1:5173/",
+        "Upgrade-Insecure-Requests": "1",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Google Chrome\";v=\"155\", \"Chromium\";v=\"155\", \"Not(A:Brand\";v=\"24\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Windows\""
+      },
+      "mixedContentType": "none",
+      "initialPriority": "VeryHigh",
+      "referrerPolicy": "strict-origin-when-cross-origin",
+      "isSameSite": false
+    }
+  ],
+  "fallbackImages": [
+    {
+      "source": "http://127.0.0.1:5173/assets/trinetrashwari-cover.jpg",
+      "width": 1624,
+      "fallback": "true"
+    },
+    {
+      "source": "http://127.0.0.1:5173/assets/trinetrashwari-video-source.jpg",
+      "width": 1280,
+      "fallback": "true"
+    }
+  ],
+  "filePreview": {
+    "cover": "file:///C:/Users/ayush/OneDrive/Documents/trinetreshwari/portfolio%20code/assets/trinetrashwari-cover.jpg",
+    "width": 1624,
+    "videoTag": "A",
+    "videoUrl": "https://youtu.be/L5fivEQxBL4?si=XWLZzccpu0Qn4izW",
+    "iframes": 0,
+    "thumbnail": 1280
   }
 }

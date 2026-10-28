@@ -1,13 +1,17 @@
 /* Temporary, dependency-free browser QA. Not part of the published site. */
 import { createServer } from 'node:http';
 import { spawn } from 'node:child_process';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, mkdtemp } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { tmpdir } from 'node:os';
 import assert from 'node:assert/strict';
 
 const root = resolve('.');
 const qa = resolve('.qa');
 await mkdir(qa, { recursive: true });
+// Keep generated browser caches outside the source repository.
+const chromeProfile = await mkdtemp(resolve(tmpdir(), 'trinetrashwari-browser-'));
 const mime = {'.html':'text/html','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png','.webp':'image/webp','.woff2':'font/woff2'};
 const server = createServer(async (req, res) => {
   try {
@@ -23,7 +27,7 @@ await new Promise(resolve => server.listen(5173, '127.0.0.1', resolve));
 const chrome = spawn('C:/Program Files/Google/Chrome/Application/chrome.exe', [
   '--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check',
   '--disable-background-networking','--disable-extensions','--remote-debugging-port=9227',
-  `--user-data-dir=${resolve(qa, 'chrome-profile')}`,'about:blank'
+  `--user-data-dir=${chromeProfile}`,'about:blank'
 ], {windowsHide:true, stdio:'ignore'});
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 let socket;
@@ -31,6 +35,7 @@ let serial = 0;
 const pending = new Map();
 const errors = [];
 const responses = [];
+const embedRequests = [];
 
 try {
   let pages;
@@ -50,6 +55,7 @@ try {
       else callback?.resolve(message.result);
     } else if(message.method === 'Runtime.exceptionThrown') errors.push(message.params.exceptionDetails);
     else if(message.method === 'Network.responseReceived') responses.push({url:message.params.response.url,status:message.params.response.status});
+    else if(message.method === 'Network.requestWillBeSent' && message.params.request.url.includes('youtube-nocookie.com/embed/')) embedRequests.push(message.params.request);
   });
   async function cdp(method, params={}) {
     const id = ++serial;
@@ -72,18 +78,6 @@ try {
   console.log('Page ready:',await evaluate(`({url:location.href,title:document.title,ready:document.readyState})`));
   console.log('Source response:',await evaluate(`fetch('assets/trinetrashwari-cover.jpg').then(async r=>({status:r.status,type:r.headers.get('content-type'),size:(await r.arrayBuffer()).byteLength}))`));
 
-  // Generate WebP delivery copies using the browser's native image encoder.
-  // The album image retains its original pixel dimensions and complete framing.
-  for(const [source,target,quality,maxWidth] of [
-    ['trinetrashwari-cover.jpg','trinetrashwari-cover.webp',.84,2000],
-    ['trinetrashwari-cover.jpg','trinetrashwari-cover-1200.webp',.86,1200],
-    ['trinetrashwari-cover.jpg','trinetrashwari-cover-640.webp',.86,640],
-    ['trinetrashwari-video-source.jpg','trinetrashwari-video.webp',.82,1280]
-  ]) {
-    const encoded = await evaluate(`(async()=>{const img=new Image();img.src='assets/${source}';await img.decode();const canvas=document.createElement('canvas');canvas.width=${maxWidth};canvas.height=Math.round(img.naturalHeight*canvas.width/img.naturalWidth);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);return {data:canvas.toDataURL('image/webp',${quality}),width:canvas.width,height:canvas.height};})()`);
-    await writeFile(resolve('assets',target),Buffer.from(encoded.data.split(',')[1],'base64'));
-    console.log(`WebP: ${target}, ${encoded.width}×${encoded.height}`);
-  }
   // JioSaavn's official PNG is used without changing its pixels or color.
   const logo = await evaluate(`(async()=>{const image=new Image();image.src='assets/icons/jiosaavn.png';await image.decode();return {width:image.naturalWidth,height:image.naturalHeight};})()`);
   console.log('Official JioSaavn logo dimensions:',logo);
@@ -105,7 +99,13 @@ try {
     assert(layout.fonts);
     assert(Math.abs(layout.video.width/layout.video.height-16/9)<.02,'Video must retain a 16:9 ratio');
     console.log(`Layout ${width}px: OK; columns ${layout.columns}`);
+    await evaluate('document.querySelector(".header-listen").click()');
+    await pause(900);
+    const videoRect=await evaluate('(()=>{const r=document.querySelector("#video-player").getBoundingClientRect();return {top:r.top,bottom:r.bottom,height:innerHeight};})()');
+    assert(videoRect.top>=-1&&videoRect.bottom<=videoRect.height+1,`Video not fully visible at ${width}px: ${JSON.stringify(videoRect)}`);
+    console.log(`Listen shortcut shows entire video at ${width}px: OK`);
     if([390,1440].includes(width)) {
+      await evaluate('document.querySelector("#video-player").scrollIntoView({behavior:"instant"})');
       await evaluate('document.querySelector(".video-poster > img").decode().then(()=>true)');
       await evaluate('window.scrollTo({top:0,behavior:"instant"})');
       await pause(200);
@@ -172,6 +172,9 @@ try {
   const video = await evaluate(`(()=>{const f=document.querySelector('iframe');return {src:f.src,title:f.title,allow:f.allow};})()`);
   assert.match(video.src,/youtube-nocookie\.com\/embed\/L5fivEQxBL4/);
   assert(!video.src.includes('autoplay'));
+  assert.equal(new URL(video.src).searchParams.get('origin'),'http://127.0.0.1:5173');
+  assert.equal(embedRequests.at(-1).headers.Referer,'http://127.0.0.1:5173/');
+  console.log('YouTube receives the actual site origin and HTTP Referer: OK');
   console.log('Thumbnail-first, no-autoplay video embed: OK',video.src);
   console.log('YouTube response:',responses.filter(r=>r.url.includes('youtube-nocookie.com/embed/')));
   await evaluate('document.querySelector("#video-player").scrollIntoView({block:"center",behavior:"instant"})');
@@ -189,7 +192,39 @@ try {
   assert.equal(await evaluate('document.querySelector("#band-links").hidden'),true);
   assert.equal(errors.length,0,JSON.stringify(errors));
   console.log('JSON-LD, hidden unconfigured social links, and JavaScript runtime: OK');
-  await writeFile(resolve(qa,'results.json'),JSON.stringify({errors,responses,links,video},null,2));
+
+  // Reproduce a missing WebP file, then confirm the real JPEG is displayed.
+  await cdp('Network.setBlockedURLs',{urls:['*trinetrashwari-cover*.webp','*trinetrashwari-video.webp']});
+  await cdp('Page.reload',{ignoreCache:true});
+  await pause(500);
+  await evaluate('document.querySelector("#video-player").scrollIntoView({behavior:"instant"})');
+  await pause(200);
+  await evaluate('Promise.all([...document.querySelectorAll("img[data-fallback]")].map(img=>img.decode())).then(()=>true)');
+  const fallbackImages=await evaluate('[...document.querySelectorAll("img[data-fallback]")].map(img=>({source:img.currentSrc,width:img.naturalWidth,fallback:img.dataset.fallbackApplied}))');
+  assert(fallbackImages.every(img=>img.source.endsWith('.jpg')&&img.width>0&&img.fallback==='true'));
+  console.log('Missing WebP files recover to JPEG for cover and video: OK');
+  await cdp('Network.setBlockedURLs',{urls:[]});
+
+  // Reproduce the user's direct-file preview. Never create a broken embed.
+  await cdp('Page.navigate',{url:pathToFileURL(resolve('index.html')).href});
+  await pause(500);
+  await evaluate('document.querySelector("#video-player").scrollIntoView({behavior:"instant"})');
+  await pause(200);
+  await evaluate('Promise.all([...document.querySelectorAll("img[data-fallback]")].map(img=>img.decode())).then(()=>true)');
+  const filePreview=await evaluate('({cover:document.querySelector(".cover").currentSrc,width:document.querySelector(".cover").naturalWidth,videoTag:document.querySelector("#load-video").tagName,videoUrl:document.querySelector("#load-video").href,iframes:document.querySelectorAll("iframe").length,thumbnail:document.querySelector(".video-poster img").naturalWidth})');
+  assert(filePreview.cover.endsWith('trinetrashwari-cover.jpg'));
+  assert(filePreview.width>0,'Direct-file JPEG must decode successfully');
+  assert.equal(filePreview.videoTag,'A');
+  assert.equal(filePreview.videoUrl,expected[1]);
+  assert.equal(filePreview.iframes,0);
+  assert.equal(filePreview.thumbnail,1280);
+  console.log('Direct file:// preview: cover and thumbnail visible; official video link replaces unsupported iframe: OK');
+  await evaluate('window.scrollTo({top:0,behavior:"instant"})');
+  await pause(200);
+  const fileShot=await cdp('Page.captureScreenshot',{format:'png'});
+  await writeFile(resolve(qa,'file-preview-check.png'),Buffer.from(fileShot.data,'base64'));
+  assert.equal(errors.length,0,JSON.stringify(errors));
+  await writeFile(resolve(qa,'results.json'),JSON.stringify({errors,responses,links,video,embedRequests,fallbackImages,filePreview},null,2));
 } finally {
   if(socket?.readyState===WebSocket.OPEN) {
     socket.send(JSON.stringify({id:++serial,method:'Browser.close'}));
