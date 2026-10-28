@@ -475,18 +475,39 @@ h1 {
   color: var(--gold)
 }
 
+.platform-card--jiosaavn {
+  --logo-size: 28px;
+  --logo-line-height: 19.5px;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 13px;
+  grid-template-rows: var(--logo-line-height) auto;
+  align-content: center;
+  gap: 1px 14px
+}
+
+/* Keep the complete official logo. Its transparent padding sits outside the
+   title row so the wordmark and action line up without shrinking the symbol. */
 .platform-card--jiosaavn .platform-icon {
-  width: 110px;
-  height: 44px;
-  object-fit: contain
+  grid-area: 1 / 1;
+  width: calc(var(--logo-size) * 1245 / 258);
+  height: calc(var(--logo-size) * 500 / 258);
+  max-width: none;
+  margin-block: calc((var(--logo-line-height) - var(--logo-size) * 500 / 258) / 2);
+  margin-left: calc(var(--logo-size) * -177 / 258)
 }
 
 .platform-card--jiosaavn .platform-copy {
-  margin-left: 1px
+  grid-area: 2 / 1;
+  margin-left: calc(var(--logo-size) * 289 / 258)
 }
 
 .platform-card--jiosaavn .platform-name {
   display: none
+}
+
+.platform-card--jiosaavn .arrow {
+  grid-area: 1 / 2 / 3 / 3;
+  justify-self: end
 }
 
 .arrow {
@@ -1216,15 +1237,9 @@ h2 {
     width: 26px;
     height: 26px
   }
-  .platform-card--jiosaavn .platform-icon {
-    width: 100px;
-    height: 40px
-  }
-  .platform-card--jiosaavn .platform-copy {
-    margin-left: 0
-  }
-  .platform-card--jiosaavn .platform-action {
-    font-size: 9px
+  .platform-card--jiosaavn {
+    --logo-size: 26px;
+    gap: 1px 12px
   }
   .chapter-divider {
     font-size: 7px;
@@ -1369,11 +1384,8 @@ h2 {
   .platform-name {
     font-size: 12px
   }
-  .platform-card--jiosaavn .platform-icon {
-    width: 110px
-  }
-  .platform-card--jiosaavn .platform-action {
-    font-size: 9px
+  .platform-card--jiosaavn {
+    --logo-line-height: 18px
   }
 }
 
