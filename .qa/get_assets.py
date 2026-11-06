@@ -50,7 +50,7 @@ jobs = [
     (icon, ('applemusic', '#FA586A')),
     (icon, ('amazonmusic', '#25D1DA')),
     (download_file, ('https://www.jiosaavn.com/corporate/_i/brand-guide/jiosaavn-logo-inline.png', 'icons/jiosaavn.png')),
-    (download_file, ('https://i.ytimg.com/vi/L5fivEQxBL4/maxresdefault.jpg', 'trinetrashwari-video-source.jpg')),
+    (download_file, ('https://i.ytimg.com/vi/2c9PK1ZfRyU/maxresdefault.jpg', 'trinetrashwari-video-source.jpg')),
     (font, ('Cinzel', 'cinzel-latin.woff2')),
     (font, ('Manrope', 'manrope-latin.woff2')),
     (download_file, ('https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/OFL.txt', 'fonts/Cinzel-OFL.txt')),

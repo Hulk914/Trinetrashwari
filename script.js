@@ -15,7 +15,7 @@ const MUSIC_PLATFORMS = Object.freeze([
     name: "YouTube",
     icon: "assets/icons/youtube.svg",
     action: "Watch the music video",
-    url: "https://youtu.be/L5fivEQxBL4?si=XWLZzccpu0Qn4izW"
+    url: "https://youtu.be/2c9PK1ZfRyU"
   },
   {
     id: "youtubemusic",
@@ -58,7 +58,7 @@ const SITE_CONFIG = Object.freeze({
   contactEmail: ""
 });
 
-const VIDEO_ID = "L5fivEQxBL4";
+const VIDEO_ID = "2c9PK1ZfRyU";
 const youtubePlatform = MUSIC_PLATFORMS.find(platform => platform.id === "youtube");
 const arrowMarkup = '<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
 

@@ -119,7 +119,7 @@ try {
   const links = await evaluate('[...document.querySelectorAll(".platform-card")].map(a=>a.getAttribute("href"))');
   const expected = [
     'https://open.spotify.com/album/5cbsY7rgRlxSGR2H37nDtb?si=YsgXbgDCQOWTPPRCgk6CtA&utm_source=copy-link',
-    'https://youtu.be/L5fivEQxBL4?si=XWLZzccpu0Qn4izW',
+    'https://youtu.be/2c9PK1ZfRyU',
     'https://music.youtube.com/watch?v=L5fivEQxBL4&si=KdR09eJH3BARC0G0&drli=1',
     'https://music.apple.com/in/album/trinetrashwari-single/6826457405',
     'https://music.amazon.in/albums/B0HP3M34LZ?do=play&trackAsin=B0HP3JGLGV&ts=1792829870&ref=dm_sh_pxql7o7OZu6CRZOmTfdSn5Uwz&referrer=dm_sh_whatsapp',
@@ -170,7 +170,7 @@ try {
   await evaluate('document.querySelector("#load-video").click()');
   await pause(2500);
   const video = await evaluate(`(()=>{const f=document.querySelector('iframe');return {src:f.src,title:f.title,allow:f.allow};})()`);
-  assert.match(video.src,/youtube-nocookie\.com\/embed\/L5fivEQxBL4/);
+  assert.match(video.src,/youtube-nocookie\.com\/embed\/2c9PK1ZfRyU/);
   assert(!video.src.includes('autoplay'));
   assert.equal(new URL(video.src).searchParams.get('origin'),'http://127.0.0.1:5173');
   assert.equal(embedRequests.at(-1).headers.Referer,'http://127.0.0.1:5173/');
